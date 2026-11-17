@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 
 from app.db import FIXTURES_DIR, connect
+from app.modules import multi_leg_net as mln
 
 
 SCHEMA = """
@@ -64,6 +65,7 @@ CREATE TABLE IF NOT EXISTS verify_reports (
 def init_db() -> None:
     with connect() as conn:
         conn.executescript(SCHEMA)
+        mln.ensure_schema(conn)
         n = conn.execute("SELECT COUNT(*) AS c FROM accounts").fetchone()["c"]
         if n:
             return

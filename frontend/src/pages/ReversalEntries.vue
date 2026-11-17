@@ -26,7 +26,7 @@ function yuan(cents) {
     <div class="panel">
       <table>
         <thead>
-          <tr><th>流水键</th><th>账户</th><th>金额（元）</th><th>原单键</th><th>业务单</th><th>状态</th></tr>
+          <tr><th>流水键</th><th>账户</th><th>金额（元）</th><th>原单键</th><th>业务单</th><th>状态</th><th>捆扎</th></tr>
         </thead>
         <tbody>
           <tr v-for="e in rows" :key="e.id">
@@ -41,9 +41,20 @@ function yuan(cents) {
                 :class="{ on: e.status === '已归并', bad: e.status === '已隔离' }"
               >{{ e.status }}</span>
             </td>
+            <td>
+              <span v-if="e.bundle_key" class="tag warn">{{ e.bundle_key }} · {{ e.bundle_status }}</span>
+              <span v-else class="muted">散笔</span>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 </template>
+
+<style scoped>
+.muted {
+  color: var(--muted);
+  font-size: 12px;
+}
+</style>

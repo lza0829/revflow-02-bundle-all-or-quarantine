@@ -1,5 +1,7 @@
 backend/data/
 backend/data_test/
+backend/data_test_bundle/
+backend/.venv/
 **/__pycache__/
 **/.pytest_cache/
 frontend/node_modules/
